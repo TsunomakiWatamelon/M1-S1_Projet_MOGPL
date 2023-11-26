@@ -164,7 +164,7 @@ class DictionnaireAdjacenceOrientePondere(object):
 
     def sous_graphe_induit(self, iterable):
         """Renvoie le sous-graphe induit par l'itérable de sommets donné."""
-        G = DictionnaireAdjacenceOriente()
+        G = DictionnaireAdjacenceOrientePondere()
         G.ajouter_sommets(iterable)
         for u, v, poids in self.arcs():
             if G.contient_sommet(u) and G.contient_sommet(v):
@@ -179,6 +179,13 @@ class DictionnaireAdjacenceOrientePondere(object):
     def voisins(self, sommet):
         """Renvoie l'ensemble des voisins du sommet donné."""
         return self.successeurs(sommet).union(self.predecesseurs(sommet))
+
+    def copy(self):
+        """Renvoie une copie du graphe."""
+        G = DictionnaireAdjacenceOrientePondere()
+        G.ajouter_sommets(self.sommets())
+        G.ajouter_arcs(self.arcs())
+        return G
 
     def __str__(self):
         """Formatage simple"""
